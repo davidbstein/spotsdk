@@ -1,0 +1,23 @@
+{
+  "name": "spotsdk",
+  "version": "0.0.1",
+  "description": "An toolkit for injecting new features into chromium apps on OSX",
+  "main": "entry_point.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidbstein/spotsdk.git"
+  },
+  "author": "David Stein <d@vidste.in>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davidbstein/spotsdk/issues"
+  },
+  "homepage": "https://github.com/davidbstein/spotsdk#readme",
+  "dependencies": {
+    "browser-pack": "^6.1.0",
+    "browser-unpack": "^1.2.0"
+  }
+}
