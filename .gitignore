@@ -1,3 +1,7 @@
+# environment files
+.unzipped_raw*
+.Spotify*
+
 # Logs
 logs
 *.log
