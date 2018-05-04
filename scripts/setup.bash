@@ -19,10 +19,8 @@ echo "
 wiping .unzipped_raw
 "
 
-cd $SCRIPT_DIR/..
-rm -rf .unzipped_raw
-mkdir .unzipped_raw
-cd .unzipped_raw
+rm -rf $SCRIPT_DIR/../.unzipped_raw
+mkdir $SCRIPT_DIR/../.unzipped_raw
 
 echo "
 making a copy of the raw source in .unzipped_raw
@@ -41,12 +39,10 @@ echo "
 unbundling all subcomponents
 "
 
-cd $SCRIPT_DIR/..
 ./scripts/unbundle.bash
 
 echo "
 creating src folders
 "
 
-cd $SCRIPT_DIR/..
 ./scripts/build_source.bash
