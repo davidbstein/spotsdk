@@ -8,29 +8,45 @@ then
 fi
 
 echo "
-copying Spotify.app into local directory as .SpotifyModified.app"
+copying Spotify.app into local directory as .SpotifyModified.app
+"
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 rm -rf $DIR/../.SpotifyModified.app
-cp -r /Applications/Spotify.app $DIR/../.SpotifyModified.app
+cp -r /Applications/Spotify.app $SCRIPT_DIR/../.SpotifyModified.app
 
+echo "
+wiping .unzipped_raw
+"
 
-echo "wiping .unzipped_raw"
-
-pushd . > /dev/null
-cd $DIR/..
+cd $SCRIPT_DIR/..
 rm -rf .unzipped_raw
 mkdir .unzipped_raw
 cd .unzipped_raw
 
-echo "making a copy of the raw source in .unzipped_raw"
+echo "
+making a copy of the raw source in .unzipped_raw
+"
 
-for rawfn in $DIR/../.SpotifyModified.app/Contents/Resources/Apps/*;
+for rawfn in $SCRIPT_DIR/../.SpotifyModified.app/Contents/Resources/Apps/*;
 do
   fn=$(echo $rawfn | tr "/" "\n" | tail -n1)
   mkdir ${fn}
   cd ${fn}
   yes | unzip -a -q $rawfn
-  cd $DIR/../.unzipped_raw
+  cd $SCRIPT_DIR/../.unzipped_raw
 done
 
+echo "
+unbundling all subcomponents
+"
+
+cd $SCRIPT_DIR/..
+./scripts/unbundle.bash
+
+echo "
+creating src folders
+"
+
+cd $SCRIPT_DIR/..
+./scripts/build_source.bash
