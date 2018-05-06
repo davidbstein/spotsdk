@@ -1,6 +1,8 @@
 
 # environment files
 .unzipped_raw*
+.unbundled*
+.sources*
 .Spotify*
 
 # Logs
