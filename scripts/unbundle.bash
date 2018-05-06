@@ -1,11 +1,31 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#############################################
+# STUPID ECMA VERSION UPGRADER
+echo "TODO: automate this and remove the prompt"
+read -p "
+you must have gone to node_modules/browser-unpack/index.html and change ecmaVersion to 8. Continue (Y/n)? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Nn]$ ]]
+then
+  exit 1
+fi
+###############################################
 
-echo "unbundle, $SCRIPT_DIR"
+
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $SCRIPT_DIR/color_functions.bash
 
 rm -rf $SCRIPT_DIR/../.unbundled
 mkdir $SCRIPT_DIR/../.unbundled
 
-for module in $SCRIPT_DIR/../.SpotifyModified.app/Contents/Resources/Apps/*;
+for module_path in $SCRIPT_DIR/../.SpotifyModified.app/Contents/Resources/Apps/*;
 do
-  pipenv run python $SCRIPT_DIR/../.unbundled/module/unbundled.json
+  module=$(echo $module_path | tr "/" "\n" | tail -n1)
+  echo_lightblue "unbundling $module"
+  #rm -rf $SCRIPT_DIR/../.unbundled/$module
+  #cp -r $SCRIPT_DIR/../.unzipped_raw/$module $SCRIPT_DIR/../.unbundled/$module
+  cd $SCRIPT_DIR/../.unzipped_raw/$module
+  $SCRIPT_DIR/../node_modules/browser-unpack/bin/cmd.js < bundle.js > unbundled.json
+  #npx browser-unpack < bundle.js > unbundled.json
+  cd -
 done;

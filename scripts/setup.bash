@@ -28,11 +28,12 @@ making a copy of the raw source in .unzipped_raw
 
 for rawfn in $SCRIPT_DIR/../.SpotifyModified.app/Contents/Resources/Apps/*;
 do
+  cd $SCRIPT_DIR/../.unzipped_raw
   fn=$(echo $rawfn | tr "/" "\n" | tail -n1)
   mkdir ${fn}
   cd ${fn}
   yes | unzip -a -q $rawfn
-  cd $SCRIPT_DIR/../.unzipped_raw
+  cd $SCRIPT_DIR/..
 done
 
 echo "
@@ -46,3 +47,4 @@ creating src folders
 "
 
 ./scripts/build_source.bash
+
