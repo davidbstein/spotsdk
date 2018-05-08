@@ -5,8 +5,9 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $SCRIPT_DIR/color_functions.bash
 pushd .
 
-cp $SCRIPT_DIR/templates/module $TARGET/$MODULE
+cp -r $SCRIPT_DIR/templates/module $TARGET/$MODULE
 cd $TARGET/$MODULE
+
 for subdir in $(find $SCRIPT_DIR/../.unbundled/$MODULE -type d | \
                 xargs python -c "import sys; print('\n'.join([a[len(sys.argv[1])+1:] for a in sys.argv[2:]]))")
 do

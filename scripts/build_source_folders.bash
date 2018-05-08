@@ -1,6 +1,7 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $SCRIPT_DIR/color_functions.bash
 
-echo "build source, $SCRIPT_DIR"
+echo_lightgreen "build source, $SCRIPT_DIR"
 
 rm -rf $SCRIPT_DIR/../.sources
 mkdir $SCRIPT_DIR/../.sources
@@ -17,11 +18,10 @@ do
     mkdir $SCRIPT_DIR/../.sources/$module/$subdir
   done
   mkdir $SCRIPT_DIR/../.sources/$module/src
-  echo $SCRIPT_DIR/../.unbundled/$module/unbundled.json
+  echo_lightblue $SCRIPT_DIR/../.unbundled/$module/unbundled.json
   pipenv run python \
       $SCRIPT_DIR/pybin/_build_source.py \
       $SCRIPT_DIR/../.unbundled/$module/unbundled.json \
       $SCRIPT_DIR/../.sources/$module/src
   cd $SCRIPT_DIR/..
-  exit
 done;

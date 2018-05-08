@@ -55,3 +55,5 @@ file in `.original/src` with anything in `src` before building. The
 build system will also throw an error if there are duplicate IDs that
 do not have the same hash. It will also throw errors if a javascript 
 file does not conform to the naming convention.
+
+I recommend starting local ID space with a prefix (ie, start at 10001).
